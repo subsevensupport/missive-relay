@@ -1,0 +1,1 @@
+fast api and pydantic, set up transcribe route that validates the payload and then sends a post to the beam endpoint
