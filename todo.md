@@ -1,1 +1,4 @@
-fast api and pydantic, set up transcribe route that validates the payload and then sends a post to the beam endpoint
+- [x] /transcribe endpoint to validate payload and send to beam for transcription
+- [x] /transcription-callback endpoint to receive transcription result
+- [ ] make dedicated send to missive function that posts message to conversation id, send transcription text there
+- [ ] /summarize endpoint that sends to a new beeam task queue. transcription callback can send here as well as posting to missive. posts results to missive as well
