@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from fastapi import BackgroundTasks, FastAPI, HTTPException, status
 from pydantic import BaseModel
 
+import Missive
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -45,7 +47,7 @@ app = FastAPI()
 async def send_for_transcription(attachment: Attachment, conversation_id: str):
     logger.info(f"Background task started for {attachment.id}")
 
-    beam_endpoint_url = "https://audio-transcriber-cb0e410-v15.app.beam.cloud"
+    beam_endpoint_url = "https://audio-transcriber-cb0e410-v16.app.beam.cloud"
     headers = {
         "Connection": "keep-alive",
         "Content-Type": "application/json",
@@ -88,7 +90,6 @@ async def process_missive_transcription_webhook(
             status_code=status.HTTP_204_NO_CONTENT,
             detail="No message found. Nothing to process.",
         )
-        # TODO: send an error message back to missive for these 204 codes using missive send conversation function (maybe we want a missive API module)
 
     attachments = latest_message.attachments
     if not attachments:
@@ -126,4 +127,12 @@ async def process_missive_transcription_webhook(
 
 @app.post("/transcribe-callback")
 def process_transcribe_callback_webhook(payload: dict):
-    print(payload)
+    text = payload.get("data").get("transcription_text")
+    conversation_id = payload.get("data").get("callback_data").get("conversation_id")
+    Missive.send_chat_message(
+        text=text,
+        conversation_id=conversation_id,
+        notification_title="Transcription completed",
+        notification_body=text,
+        author_name="subseven transcription robot",
+    )
