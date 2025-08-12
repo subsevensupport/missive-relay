@@ -47,7 +47,7 @@ app = FastAPI()
 async def send_for_transcription(attachment: Attachment, conversation_id: str):
     logger.info(f"Background task started for {attachment.id}")
 
-    beam_endpoint_url = "https://audio-transcriber-cb0e410-v16.app.beam.cloud"
+    beam_endpoint_url = "https://audio-transcriber-cb0e410-v17.app.beam.cloud"
     headers = {
         "Connection": "keep-alive",
         "Content-Type": "application/json",
