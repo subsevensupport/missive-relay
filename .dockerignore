@@ -1,0 +1,51 @@
+# .dockerignore
+
+# Secrets & Environment
+.env
+
+# IDE / Editor Config
+.vscode/
+
+# Python cache & compiled files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Virtual Environments
+env/
+venv/
+.venv/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Testing & Coverage
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Logs & Miscellaneous
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+todo.md
+
+# Version Control
+.git
+.gitignore
+
+# Local Databases
+*.db
+*.sqlite
+*.sqlite3
